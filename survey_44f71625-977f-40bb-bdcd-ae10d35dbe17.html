@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CRM Survey - Cenciarini &amp; Co.</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+*{box-sizing:border-box}body{font-family:-apple-system,Arial,sans-serif;background:#f0f2f5;margin:0;padding:20px}
+.ct{max-width:700px;margin:0 auto}.hd{background:#2c3e50;color:#fff;padding:24px;border-radius:12px 12px 0 0}
+.hd h1{margin:0;font-size:22px}.hd p{margin:6px 0 0;opacity:.8;font-size:14px}
+.it{background:#fffde7;padding:16px 24px;border:1px solid #e0e0e0;font-size:13px;color:#555;line-height:1.6}
+.lg{background:#f8f9fa;padding:14px 24px;border:1px solid #e0e0e0;border-top:0;font-size:12px;color:#666}
+.lg td{padding:2px 8px 2px 0}.dt{font-size:18px}
+.fa{background:#fff;padding:20px;border:1px solid #e0e0e0;border-top:0}
+.cc{border:2px solid #eee;border-radius:8px;padding:16px;margin-bottom:12px;transition:all .2s}
+.cc.ok{border-color:#2ecc71;background:#f0fff4}
+.ch{display:flex;align-items:flex-start;margin-bottom:10px}
+.cn{background:#2c3e50;color:#fff;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;margin-right:12px;flex-shrink:0}
+.ci{flex:1}.cd{color:#888;font-size:12px}
+.br{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+.sb{padding:7px 14px;border:2px solid transparent;border-radius:6px;color:#fff;font-size:12px;font-weight:700;cursor:pointer;transition:all .2s;opacity:.55}
+.sb:hover{opacity:.85;transform:scale(1.05)}
+.sb.on{opacity:1;border-color:#333;transform:scale(1.1);box-shadow:0 2px 8px rgba(0,0,0,.3)}
+.tr{display:flex;gap:16px;margin-bottom:8px;font-size:12px;color:#666}
+.ni{width:100%;padding:8px 12px;border:1px solid #ddd;border-radius:6px;font-size:13px}
+.ni:focus{outline:0;border-color:#3498db}
+.sa{background:#f8f9fa;padding:20px;border:1px solid #e0e0e0;border-top:0;border-radius:0 0 12px 12px;text-align:center}
+.su{padding:14px 40px;background:#2c3e50;color:#fff;border:0;border-radius:8px;font-size:16px;font-weight:700;cursor:pointer}
+.su:hover{background:#34495e}.su:disabled{background:#bdc3c7;cursor:not-allowed}
+input[type=radio]{margin-right:4px}
+</style></head><body>
+<div class="ct">
+<div class="hd"><h1>CRM Survey</h1><p>Cenciarini &amp; Co. &mdash; 10 contatti da classificare</p></div>
+<div class="it">Gentile Professore,<br><br>per ogni contatto, selezioni il bottone che descrive meglio il Suo rapporto con questa persona. Se desidera aggiungere note, le scriva nel campo di testo. Alla fine prema <b>Invia classificazioni</b>.</div>
+<div class="lg"><b>Legenda:</b><table>
+<tr><td class="dt" style="color:#e74c3c">&#9679;</td><td><b>Inner Circle</b> - ci sentiamo quasi ogni giorno, massima fiducia</td></tr>
+<tr><td class="dt" style="color:#e67e22">&#9679;</td><td><b>Strong</b> - rapporto stretto, ci sentiamo spesso</td></tr>
+<tr><td class="dt" style="color:#f1c40f">&#9679;</td><td><b>Regular</b> - ci sentiamo con regolarita, rapporto consolidato</td></tr>
+<tr><td class="dt" style="color:#2ecc71">&#9679;</td><td><b>Occasional</b> - ci sentiamo ogni tanto, rapporto reale</td></tr>
+<tr><td class="dt" style="color:#3498db">&#9679;</td><td><b>Acquaintance</b> - ci conosciamo, interazione minima</td></tr>
+<tr><td class="dt" style="color:#95a5a6">&#9679;</td><td><b>Cold</b> - connessione LinkedIn, non ci conosciamo</td></tr>
+</table></div>
+<div class="fa"><div class="cc" id="c_33d3c252-e723-4e29-8d56-f1416aa8728c">
+            <div class="ch"><span class="cn">1</span>
+            <div class="ci"><b>Gustavo Prada</b> <a href="https://www.linkedin.com/in/gustavoprada" target="_blank" style="color:#0077b5;font-size:12px">LinkedIn ↗</a><br><span class="cd">Senior Business Intelligence Specialist @ Indara (Sydney, Australia)</span></div></div>
+            <div class="br"><div class="sb" data-c="33d3c252-e723-4e29-8d56-f1416aa8728c" data-v="inner_circle" style="background:#e74c3c">Inner Circle</div><div class="sb" data-c="33d3c252-e723-4e29-8d56-f1416aa8728c" data-v="strong" style="background:#e67e22">Strong</div><div class="sb" data-c="33d3c252-e723-4e29-8d56-f1416aa8728c" data-v="regular" style="background:#f1c40f">Regular</div><div class="sb" data-c="33d3c252-e723-4e29-8d56-f1416aa8728c" data-v="occasional" style="background:#2ecc71">Occasional</div><div class="sb" data-c="33d3c252-e723-4e29-8d56-f1416aa8728c" data-v="acquaintance" style="background:#3498db">Acquaintance</div><div class="sb" data-c="33d3c252-e723-4e29-8d56-f1416aa8728c" data-v="cold" style="background:#95a5a6">Cold</div></div>
+            <div class="tr">
+                <label><input type="radio" name="type_33d3c252-e723-4e29-8d56-f1416aa8728c" value="professional" checked> Professionale</label>
+                <label><input type="radio" name="type_33d3c252-e723-4e29-8d56-f1416aa8728c" value="personal"> Personale</label>
+                <label><input type="radio" name="type_33d3c252-e723-4e29-8d56-f1416aa8728c" value="both"> Entrambi</label>
+            </div>
+            <input type="text" id="notes_33d3c252-e723-4e29-8d56-f1416aa8728c" placeholder="Note su questo contatto (opzionale)" class="ni">
+        </div><div class="cc" id="c_57e6a437-edcb-4d37-a284-f4ffd56331ca">
+            <div class="ch"><span class="cn">2</span>
+            <div class="ci"><b>Nicola De Feudis</b> <a href="https://www.linkedin.com/in/nicola-de-feudis-531459" target="_blank" style="color:#0077b5;font-size:12px">LinkedIn ↗</a><br><span class="cd">Head of Finance and Innovation @ MAYS International SRL</span></div></div>
+            <div class="br"><div class="sb" data-c="57e6a437-edcb-4d37-a284-f4ffd56331ca" data-v="inner_circle" style="background:#e74c3c">Inner Circle</div><div class="sb" data-c="57e6a437-edcb-4d37-a284-f4ffd56331ca" data-v="strong" style="background:#e67e22">Strong</div><div class="sb" data-c="57e6a437-edcb-4d37-a284-f4ffd56331ca" data-v="regular" style="background:#f1c40f">Regular</div><div class="sb" data-c="57e6a437-edcb-4d37-a284-f4ffd56331ca" data-v="occasional" style="background:#2ecc71">Occasional</div><div class="sb" data-c="57e6a437-edcb-4d37-a284-f4ffd56331ca" data-v="acquaintance" style="background:#3498db">Acquaintance</div><div class="sb" data-c="57e6a437-edcb-4d37-a284-f4ffd56331ca" data-v="cold" style="background:#95a5a6">Cold</div></div>
+            <div class="tr">
+                <label><input type="radio" name="type_57e6a437-edcb-4d37-a284-f4ffd56331ca" value="professional" checked> Professionale</label>
+                <label><input type="radio" name="type_57e6a437-edcb-4d37-a284-f4ffd56331ca" value="personal"> Personale</label>
+                <label><input type="radio" name="type_57e6a437-edcb-4d37-a284-f4ffd56331ca" value="both"> Entrambi</label>
+            </div>
+            <input type="text" id="notes_57e6a437-edcb-4d37-a284-f4ffd56331ca" placeholder="Note su questo contatto (opzionale)" class="ni">
+        </div><div class="cc" id="c_495c09cc-120b-4fa0-a90b-dd187c395f26">
+            <div class="ch"><span class="cn">3</span>
+            <div class="ci"><b>Massimo Mazzi</b> <a href="https://www.linkedin.com/in/massimo-mazzi-1627a435" target="_blank" style="color:#0077b5;font-size:12px">LinkedIn ↗</a><br><span class="cd">Manager delle operazioni @ Redilmat Italia Srl (Milano, Italia)</span></div></div>
+            <div class="br"><div class="sb" data-c="495c09cc-120b-4fa0-a90b-dd187c395f26" data-v="inner_circle" style="background:#e74c3c">Inner Circle</div><div class="sb" data-c="495c09cc-120b-4fa0-a90b-dd187c395f26" data-v="strong" style="background:#e67e22">Strong</div><div class="sb" data-c="495c09cc-120b-4fa0-a90b-dd187c395f26" data-v="regular" style="background:#f1c40f">Regular</div><div class="sb" data-c="495c09cc-120b-4fa0-a90b-dd187c395f26" data-v="occasional" style="background:#2ecc71">Occasional</div><div class="sb" data-c="495c09cc-120b-4fa0-a90b-dd187c395f26" data-v="acquaintance" style="background:#3498db">Acquaintance</div><div class="sb" data-c="495c09cc-120b-4fa0-a90b-dd187c395f26" data-v="cold" style="background:#95a5a6">Cold</div></div>
+            <div class="tr">
+                <label><input type="radio" name="type_495c09cc-120b-4fa0-a90b-dd187c395f26" value="professional" checked> Professionale</label>
+                <label><input type="radio" name="type_495c09cc-120b-4fa0-a90b-dd187c395f26" value="personal"> Personale</label>
+                <label><input type="radio" name="type_495c09cc-120b-4fa0-a90b-dd187c395f26" value="both"> Entrambi</label>
+            </div>
+            <input type="text" id="notes_495c09cc-120b-4fa0-a90b-dd187c395f26" placeholder="Note su questo contatto (opzionale)" class="ni">
+        </div><div class="cc" id="c_15d72a14-6ad9-424c-9221-51ab0f59939d">
+            <div class="ch"><span class="cn">4</span>
+            <div class="ci"><b>Lennart Allzeit</b> <a href="https://www.linkedin.com/in/lennart-allzeit-947344122" target="_blank" style="color:#0077b5;font-size:12px">LinkedIn ↗</a><br><span class="cd">Corporate Finance & Treasury - Liquidity Planning @ Porsche AG (Stuttgart, Germany)</span></div></div>
+            <div class="br"><div class="sb" data-c="15d72a14-6ad9-424c-9221-51ab0f59939d" data-v="inner_circle" style="background:#e74c3c">Inner Circle</div><div class="sb" data-c="15d72a14-6ad9-424c-9221-51ab0f59939d" data-v="strong" style="background:#e67e22">Strong</div><div class="sb" data-c="15d72a14-6ad9-424c-9221-51ab0f59939d" data-v="regular" style="background:#f1c40f">Regular</div><div class="sb" data-c="15d72a14-6ad9-424c-9221-51ab0f59939d" data-v="occasional" style="background:#2ecc71">Occasional</div><div class="sb" data-c="15d72a14-6ad9-424c-9221-51ab0f59939d" data-v="acquaintance" style="background:#3498db">Acquaintance</div><div class="sb" data-c="15d72a14-6ad9-424c-9221-51ab0f59939d" data-v="cold" style="background:#95a5a6">Cold</div></div>
+            <div class="tr">
+                <label><input type="radio" name="type_15d72a14-6ad9-424c-9221-51ab0f59939d" value="professional" checked> Professionale</label>
+                <label><input type="radio" name="type_15d72a14-6ad9-424c-9221-51ab0f59939d" value="personal"> Personale</label>
+                <label><input type="radio" name="type_15d72a14-6ad9-424c-9221-51ab0f59939d" value="both"> Entrambi</label>
+            </div>
+            <input type="text" id="notes_15d72a14-6ad9-424c-9221-51ab0f59939d" placeholder="Note su questo contatto (opzionale)" class="ni">
+        </div><div class="cc" id="c_bd76b335-d5ff-4cce-a2a6-db2b8eb974c1">
+            <div class="ch"><span class="cn">5</span>
+            <div class="ci"><b>TC Cilliers</b> <a href="https://www.linkedin.com/in/tc-cilliers-9949b03" target="_blank" style="color:#0077b5;font-size:12px">LinkedIn ↗</a><br><span class="cd">Head of Integrated Planning @ Sasol International Chemicals (Hamburg, Germany)</span></div></div>
+            <div class="br"><div class="sb" data-c="bd76b335-d5ff-4cce-a2a6-db2b8eb974c1" data-v="inner_circle" style="background:#e74c3c">Inner Circle</div><div class="sb" data-c="bd76b335-d5ff-4cce-a2a6-db2b8eb974c1" data-v="strong" style="background:#e67e22">Strong</div><div class="sb" data-c="bd76b335-d5ff-4cce-a2a6-db2b8eb974c1" data-v="regular" style="background:#f1c40f">Regular</div><div class="sb" data-c="bd76b335-d5ff-4cce-a2a6-db2b8eb974c1" data-v="occasional" style="background:#2ecc71">Occasional</div><div class="sb" data-c="bd76b335-d5ff-4cce-a2a6-db2b8eb974c1" data-v="acquaintance" style="background:#3498db">Acquaintance</div><div class="sb" data-c="bd76b335-d5ff-4cce-a2a6-db2b8eb974c1" data-v="cold" style="background:#95a5a6">Cold</div></div>
+            <div class="tr">
+                <label><input type="radio" name="type_bd76b335-d5ff-4cce-a2a6-db2b8eb974c1" value="professional" checked> Professionale</label>
+                <label><input type="radio" name="type_bd76b335-d5ff-4cce-a2a6-db2b8eb974c1" value="personal"> Personale</label>
+                <label><input type="radio" name="type_bd76b335-d5ff-4cce-a2a6-db2b8eb974c1" value="both"> Entrambi</label>
+            </div>
+            <input type="text" id="notes_bd76b335-d5ff-4cce-a2a6-db2b8eb974c1" placeholder="Note su questo contatto (opzionale)" class="ni">
+        </div><div class="cc" id="c_34a37a89-cbe8-4af1-8053-6cad198f1172">
+            <div class="ch"><span class="cn">6</span>
+            <div class="ci"><b>Himanshu Pant</b> <a href="https://www.linkedin.com/in/himanshu-pant-28031988" target="_blank" style="color:#0077b5;font-size:12px">LinkedIn ↗</a><br><span class="cd">Global Digital Marketing Manager @ Sonic Equipment BV (Amsterdam, Paesi Bassi)</span></div></div>
+            <div class="br"><div class="sb" data-c="34a37a89-cbe8-4af1-8053-6cad198f1172" data-v="inner_circle" style="background:#e74c3c">Inner Circle</div><div class="sb" data-c="34a37a89-cbe8-4af1-8053-6cad198f1172" data-v="strong" style="background:#e67e22">Strong</div><div class="sb" data-c="34a37a89-cbe8-4af1-8053-6cad198f1172" data-v="regular" style="background:#f1c40f">Regular</div><div class="sb" data-c="34a37a89-cbe8-4af1-8053-6cad198f1172" data-v="occasional" style="background:#2ecc71">Occasional</div><div class="sb" data-c="34a37a89-cbe8-4af1-8053-6cad198f1172" data-v="acquaintance" style="background:#3498db">Acquaintance</div><div class="sb" data-c="34a37a89-cbe8-4af1-8053-6cad198f1172" data-v="cold" style="background:#95a5a6">Cold</div></div>
+            <div class="tr">
+                <label><input type="radio" name="type_34a37a89-cbe8-4af1-8053-6cad198f1172" value="professional" checked> Professionale</label>
+                <label><input type="radio" name="type_34a37a89-cbe8-4af1-8053-6cad198f1172" value="personal"> Personale</label>
+                <label><input type="radio" name="type_34a37a89-cbe8-4af1-8053-6cad198f1172" value="both"> Entrambi</label>
+            </div>
+            <input type="text" id="notes_34a37a89-cbe8-4af1-8053-6cad198f1172" placeholder="Note su questo contatto (opzionale)" class="ni">
+        </div><div class="cc" id="c_6b842110-844e-4054-b3f3-952d5e96b19b">
+            <div class="ch"><span class="cn">7</span>
+            <div class="ci"><b>Henri Lusa</b> <a href="https://www.linkedin.com/in/henri-lusa-46b5563" target="_blank" style="color:#0077b5;font-size:12px">LinkedIn ↗</a><br><span class="cd">Partner, Head of Credit Secondary @ CVC Secondary Partners (Londra, Regno Unito)</span></div></div>
+            <div class="br"><div class="sb" data-c="6b842110-844e-4054-b3f3-952d5e96b19b" data-v="inner_circle" style="background:#e74c3c">Inner Circle</div><div class="sb" data-c="6b842110-844e-4054-b3f3-952d5e96b19b" data-v="strong" style="background:#e67e22">Strong</div><div class="sb" data-c="6b842110-844e-4054-b3f3-952d5e96b19b" data-v="regular" style="background:#f1c40f">Regular</div><div class="sb" data-c="6b842110-844e-4054-b3f3-952d5e96b19b" data-v="occasional" style="background:#2ecc71">Occasional</div><div class="sb" data-c="6b842110-844e-4054-b3f3-952d5e96b19b" data-v="acquaintance" style="background:#3498db">Acquaintance</div><div class="sb" data-c="6b842110-844e-4054-b3f3-952d5e96b19b" data-v="cold" style="background:#95a5a6">Cold</div></div>
+            <div class="tr">
+                <label><input type="radio" name="type_6b842110-844e-4054-b3f3-952d5e96b19b" value="professional" checked> Professionale</label>
+                <label><input type="radio" name="type_6b842110-844e-4054-b3f3-952d5e96b19b" value="personal"> Personale</label>
+                <label><input type="radio" name="type_6b842110-844e-4054-b3f3-952d5e96b19b" value="both"> Entrambi</label>
+            </div>
+            <input type="text" id="notes_6b842110-844e-4054-b3f3-952d5e96b19b" placeholder="Note su questo contatto (opzionale)" class="ni">
+        </div><div class="cc" id="c_7ed736fc-1107-43d2-b942-9baeb1ac4a1f">
+            <div class="ch"><span class="cn">8</span>
+            <div class="ci"><b>Massimo Paolo</b> <a href="https://www.linkedin.com/in/massimo-paolo-0808806" target="_blank" style="color:#0077b5;font-size:12px">LinkedIn ↗</a><br><span class="cd">SVP Finance, CFO EMEA @ Diageo (London, United Kingdom)</span></div></div>
+            <div class="br"><div class="sb" data-c="7ed736fc-1107-43d2-b942-9baeb1ac4a1f" data-v="inner_circle" style="background:#e74c3c">Inner Circle</div><div class="sb" data-c="7ed736fc-1107-43d2-b942-9baeb1ac4a1f" data-v="strong" style="background:#e67e22">Strong</div><div class="sb" data-c="7ed736fc-1107-43d2-b942-9baeb1ac4a1f" data-v="regular" style="background:#f1c40f">Regular</div><div class="sb" data-c="7ed736fc-1107-43d2-b942-9baeb1ac4a1f" data-v="occasional" style="background:#2ecc71">Occasional</div><div class="sb" data-c="7ed736fc-1107-43d2-b942-9baeb1ac4a1f" data-v="acquaintance" style="background:#3498db">Acquaintance</div><div class="sb" data-c="7ed736fc-1107-43d2-b942-9baeb1ac4a1f" data-v="cold" style="background:#95a5a6">Cold</div></div>
+            <div class="tr">
+                <label><input type="radio" name="type_7ed736fc-1107-43d2-b942-9baeb1ac4a1f" value="professional" checked> Professionale</label>
+                <label><input type="radio" name="type_7ed736fc-1107-43d2-b942-9baeb1ac4a1f" value="personal"> Personale</label>
+                <label><input type="radio" name="type_7ed736fc-1107-43d2-b942-9baeb1ac4a1f" value="both"> Entrambi</label>
+            </div>
+            <input type="text" id="notes_7ed736fc-1107-43d2-b942-9baeb1ac4a1f" placeholder="Note su questo contatto (opzionale)" class="ni">
+        </div><div class="cc" id="c_fc146544-ba50-4cf2-827f-655f75d90eed">
+            <div class="ch"><span class="cn">9</span>
+            <div class="ci"><b>Leo Coelho</b> <a href="https://www.linkedin.com/in/leovigildocoelho" target="_blank" style="color:#0077b5;font-size:12px">LinkedIn ↗</a><br><span class="cd">CEO & Co-Founder @ IONIC Health (Remote, USA)</span></div></div>
+            <div class="br"><div class="sb" data-c="fc146544-ba50-4cf2-827f-655f75d90eed" data-v="inner_circle" style="background:#e74c3c">Inner Circle</div><div class="sb" data-c="fc146544-ba50-4cf2-827f-655f75d90eed" data-v="strong" style="background:#e67e22">Strong</div><div class="sb" data-c="fc146544-ba50-4cf2-827f-655f75d90eed" data-v="regular" style="background:#f1c40f">Regular</div><div class="sb" data-c="fc146544-ba50-4cf2-827f-655f75d90eed" data-v="occasional" style="background:#2ecc71">Occasional</div><div class="sb" data-c="fc146544-ba50-4cf2-827f-655f75d90eed" data-v="acquaintance" style="background:#3498db">Acquaintance</div><div class="sb" data-c="fc146544-ba50-4cf2-827f-655f75d90eed" data-v="cold" style="background:#95a5a6">Cold</div></div>
+            <div class="tr">
+                <label><input type="radio" name="type_fc146544-ba50-4cf2-827f-655f75d90eed" value="professional" checked> Professionale</label>
+                <label><input type="radio" name="type_fc146544-ba50-4cf2-827f-655f75d90eed" value="personal"> Personale</label>
+                <label><input type="radio" name="type_fc146544-ba50-4cf2-827f-655f75d90eed" value="both"> Entrambi</label>
+            </div>
+            <input type="text" id="notes_fc146544-ba50-4cf2-827f-655f75d90eed" placeholder="Note su questo contatto (opzionale)" class="ni">
+        </div><div class="cc" id="c_c41a03c2-e161-435e-97aa-324e8a7424d7">
+            <div class="ch"><span class="cn">10</span>
+            <div class="ci"><b>Helena Vallvé</b> <a href="https://www.linkedin.com/in/hvallve" target="_blank" style="color:#0077b5;font-size:12px">LinkedIn ↗</a><br><span class="cd">Global Development Senior Manager @ JAKALA (Milano, Italia)</span></div></div>
+            <div class="br"><div class="sb" data-c="c41a03c2-e161-435e-97aa-324e8a7424d7" data-v="inner_circle" style="background:#e74c3c">Inner Circle</div><div class="sb" data-c="c41a03c2-e161-435e-97aa-324e8a7424d7" data-v="strong" style="background:#e67e22">Strong</div><div class="sb" data-c="c41a03c2-e161-435e-97aa-324e8a7424d7" data-v="regular" style="background:#f1c40f">Regular</div><div class="sb" data-c="c41a03c2-e161-435e-97aa-324e8a7424d7" data-v="occasional" style="background:#2ecc71">Occasional</div><div class="sb" data-c="c41a03c2-e161-435e-97aa-324e8a7424d7" data-v="acquaintance" style="background:#3498db">Acquaintance</div><div class="sb" data-c="c41a03c2-e161-435e-97aa-324e8a7424d7" data-v="cold" style="background:#95a5a6">Cold</div></div>
+            <div class="tr">
+                <label><input type="radio" name="type_c41a03c2-e161-435e-97aa-324e8a7424d7" value="professional" checked> Professionale</label>
+                <label><input type="radio" name="type_c41a03c2-e161-435e-97aa-324e8a7424d7" value="personal"> Personale</label>
+                <label><input type="radio" name="type_c41a03c2-e161-435e-97aa-324e8a7424d7" value="both"> Entrambi</label>
+            </div>
+            <input type="text" id="notes_c41a03c2-e161-435e-97aa-324e8a7424d7" placeholder="Note su questo contatto (opzionale)" class="ni">
+        </div></div>
+<div class="sa"><button class="su" id="sb" disabled onclick="submitSurvey()">Invia classificazioni</button>
+<p style="margin:8px 0 0;font-size:12px;color:#aaa" id="st">Selezioni almeno un contatto</p></div>
+</div>
+<script>
+var SUPA_URL = "https://iczuqevgsriylgdcrojv.supabase.co";
+var SUPA_KEY = "sb_publishable_C_9b__iLlHZpvFV7pH6mZw_PGuVEc93";
+var selections = {};
+
+document.querySelectorAll('.sb').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+        var cid = btn.dataset.c;
+        document.querySelectorAll('.sb[data-c="'+cid+'"]').forEach(function(b){ b.classList.remove('on') });
+        btn.classList.add('on');
+        selections[cid] = btn.dataset.v;
+        document.getElementById('c_'+cid).classList.add('ok');
+        var n = Object.keys(selections).length;
+        document.getElementById('sb').disabled = n === 0;
+        document.getElementById('st').textContent = n + ' classificat' + (n===1?'o':'i');
+    });
+});
+
+async function submitSurvey() {
+    document.getElementById('sb').disabled = true;
+    document.getElementById('st').textContent = 'Invio in corso...';
+    try {
+        for (var cid in selections) {
+            var strength = selections[cid];
+            var typeEl = document.querySelector('input[name="type_'+cid+'"]:checked');
+            var type = typeEl ? typeEl.value : 'professional';
+            var notes = document.getElementById('notes_'+cid).value.trim();
+
+            await fetch(SUPA_URL + '/rest/v1/rpc/set_contact_relationship', {
+                method: 'POST',
+                headers: {'Content-Type':'application/json','apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY},
+                body: JSON.stringify({p_contact_id:cid,p_strength:strength,p_type:type})
+            });
+
+            if (notes) {
+                await fetch(SUPA_URL + '/rest/v1/contacts?id=eq.' + cid, {
+                    method: 'PATCH',
+                    headers: {'Content-Type':'application/json','apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY,'Prefer':'return=minimal'},
+                    body: JSON.stringify({work_notes: notes})
+                });
+            }
+        }
+        document.querySelector('.ct').innerHTML = '<div style="text-align:center;padding:60px"><h2 style="color:#2ecc71">&#10003; ' + Object.keys(selections).length + ' contatti aggiornati</h2><p>Grazie Professore! Le classificazioni sono state salvate nel CRM.</p><p style="color:#aaa;font-size:12px">Puo chiudere questa pagina.</p></div>';
+    } catch(e) {
+        document.getElementById('st').textContent = 'Errore: ' + e.message;
+        document.getElementById('sb').disabled = false;
+    }
+}
+</script></body></html>
